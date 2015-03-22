@@ -7,7 +7,9 @@
  */
 #include <opencv2/opencv.hpp>
 #include "../utils/random.h"
-
+#if _MSC_VER
+#define M_PI 3.14159265358979323846
+#endif
 namespace cxxnet {
 /*! \brief helper class to do image augmentation */
 class ImageAugmenter {

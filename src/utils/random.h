@@ -26,7 +26,7 @@ class RandomSampler {
   }
   /*! \brief return a real number uniform in [0,1) */
   inline double NextDouble() {
-    return static_cast<double>(rand_r(&rseed_)) /
+    return static_cast<double>(rand()) /
         (static_cast<double>(RAND_MAX) + 1.0);
   }
   /*! \brief return a random number in n */

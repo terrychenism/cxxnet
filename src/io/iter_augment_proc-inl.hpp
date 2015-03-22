@@ -11,6 +11,9 @@
 #include "../utils/io.h"
 #include "../utils/random.h"
 #include "../utils/thread_buffer.h"
+#ifdef _MSC_VER
+#include "time.h"
+#endif
 
 #if CXXNET_USE_OPENCV
 #include "./image_augmenter-inl.hpp"

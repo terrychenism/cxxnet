@@ -23,9 +23,22 @@ inline double GetTime(void) {
   mach_port_deallocate(mach_task_self(), cclock);
   return static_cast<double>(mts.tv_sec) + static_cast<double>(mts.tv_nsec) * 1e-9;
   #else
+#if _MSC_VER
+	FILETIME ft;  
+	LARGE_INTEGER li;  
+	__int64 t;  
+	static int tzflag;  
+	GetSystemTimeAsFileTime (&ft);  
+	li.LowPart = ft.dwLowDateTime;  
+	li.HighPart = ft.dwHighDateTime;  
+	t = li.QuadPart;      /* In 100-nanosecond intervals */  
+	t -= 11644473600000000Ui64;   /* Offset to the Epoch time */   
+	return static_cast<double>(t) * 1e-7;/* There is no nano second timer in windows */
+#else
   timespec ts;
   utils::Check(clock_gettime(CLOCK_REALTIME, &ts) == 0, "failed to get time");
   return static_cast<double>(ts.tv_sec) + static_cast<double>(ts.tv_nsec) * 1e-9;
+  #endif
   #endif
 }
 }

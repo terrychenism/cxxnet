@@ -6,8 +6,11 @@
  * \author Tianqi Chen
  */
 #include <mshadow/tensor.h>
- #include "./updater.h"
+#include "./updater.h"
 #include "./param.h"
+#ifdef _MSC_VER
+#define isnan _isnan
+#endif
 
 namespace cxxnet {
 namespace updater {
